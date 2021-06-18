@@ -24,6 +24,16 @@ variable "ami_name" {
   type  = string
 }
 
+variable "min_inst" {
+  type  = number
+  default = 2
+}
+
+variable "max_inst" {
+  type  = number
+  default = 4
+}
+
 ####################################################################
 # On recherche la derniere AMI créée avec le Name TAG Packer-Ansible
 data "aws_ami" "selected" {
@@ -152,8 +162,8 @@ resource "aws_autoscaling_group" "web-asg" {
   load_balancers       = [aws_elb.web-elb.name]
   health_check_type    = "ELB"
 
-  max_size = 4
-  min_size = 2
+  max_size = "${var.max_inst}"
+  min_size = "${var.min_inst}"
 
   tag {
     key                 = "name"
