@@ -18,6 +18,7 @@ variable "app-name" {
 
 variable "app-port" {
   type  = number
+  default = 443
 }
 
 variable "ami_name" {
