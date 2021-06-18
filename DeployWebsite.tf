@@ -18,6 +18,10 @@ variable "app-name" {
   default = "WebApache"
 }
 
+variable "ami_name" {
+  type  = string
+}
+
 ####################################################################
 # On recherche la derniere AMI créée avec le Name TAG Packer-Ansible
 data "aws_ami" "selected" {
