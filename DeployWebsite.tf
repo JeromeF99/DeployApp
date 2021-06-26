@@ -67,14 +67,12 @@ data "aws_subnet" "subnet-public-1" {
 }
 
 data "aws_subnet" "subnet-public-2" {
-  count = var.env == "prod" ? 1 : 0
   tags = {
     Name = "${var.env}-subnet-public-2"
   }
 }
 
 data "aws_subnet" "subnet-public-3" {
-  count = var.env == "prod" ? 1 : 0
   tags = {
     Name = "${var.env}-subnet-public-3"
   }
@@ -87,14 +85,12 @@ data "aws_subnet" "subnet-private-1" {
 }
 
 data "aws_subnet" "subnet-private-2" {
-  count = var.env == "prod" ? 1 : 0
   tags = {
     Name = "${var.env}-subnet-private-2"
   }
 }
 
 data "aws_subnet" "subnet-private-3" {
-  count = var.env == "prod" ? 1 : 0
   tags = {
     Name = "${var.env}-subnet-private-3"
   }
