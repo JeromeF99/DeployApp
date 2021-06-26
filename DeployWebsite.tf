@@ -48,10 +48,10 @@ data "aws_ami" "selected" {
     name   = "tag:Name"
     values = ["${var.ami_name}"]
   }
-  filter {
-    name  = "tag:Port"
-    values = ["${var.app-port}"]
-  }
+#  filter {
+#    name  = "tag:Port"
+#    values = ["${var.app-port}"]
+#  }
   most_recent = true
 }
 
