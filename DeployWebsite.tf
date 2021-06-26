@@ -270,10 +270,10 @@ output "elb_dns_name" {
   value       = aws_elb.web-elb.dns_name
 }
 
-data "http" "example" {
-  url = "http://${aws_elb.web-elb.dns_name}:${var.app-port}" 
-  
-  request_headers = {
-    Accept = "application/json"
-  }
-}
+#data "http" "example" {
+#  url = "http://${aws_elb.web-elb.dns_name}:${var.app-port}" 
+#  
+#  request_headers = {
+#    Accept = "application/json"
+#  }
+#}
