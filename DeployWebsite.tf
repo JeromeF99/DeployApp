@@ -168,8 +168,8 @@ resource "aws_autoscaling_group" "web-asg" {
   load_balancers       = [aws_elb.web-elb.name]
   health_check_type    = "ELB"
 
-  max_size = "${var.max_inst}"
-  min_size = "${var.min_inst}"
+  max_size = var.env == "prod" ? "${var.max_inst}" : 1
+  min_size = var.env == "prod" ? "${var.min_inst}" : 1
 
   tag {
     key                 = "name"
