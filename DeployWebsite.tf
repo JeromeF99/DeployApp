@@ -163,8 +163,7 @@ resource "aws_launch_configuration" "web-lc" {
 # ASG
 resource "aws_autoscaling_group" "web-asg" {
   launch_configuration = aws_launch_configuration.web-lc.id
-  vpc_zone_identifier  = var.env == "prod" ? [data.aws_subnet.subnet-private-1.id, data.aws_subnet.subnet-private-2.id, data.aws_subnet.subnet-private-3.id] :
-    [data.aws_subnet.subnet-private-1.id]
+  vpc_zone_identifier  = [data.aws_subnet.subnet-private-1.id, data.aws_subnet.subnet-private-2.*.id[count.index], data.aws_subnet.subnet-private-3.*.id[count.index]]
   load_balancers       = [aws_elb.web-elb.name]
   health_check_type    = "ELB"
 
@@ -184,8 +183,7 @@ resource "aws_autoscaling_group" "web-asg" {
 # ELB
 resource "aws_elb" "web-elb" {
   name            = "${var.env}-elb"
-  subnets         = var.env == "prod" ? [data.aws_subnet.subnet-public-1.id, data.aws_subnet.subnet-public-2.id, data.aws_subnet.subnet-public-3.id] :
-    [data.aws_subnet.subnet-public-1.id]
+  subnets         = [data.aws_subnet.subnet-public-1.id, data.aws_subnet.subnet-public-2.*.id[count.index], data.aws_subnet.subnet-public-3.*.id[count.index]]
   security_groups = [aws_security_group.web-sg-elb.id]
 
   listener {
