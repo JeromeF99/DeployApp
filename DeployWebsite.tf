@@ -269,3 +269,11 @@ output "elb_dns_name" {
   description = "The DNS name of the ELB"
   value       = aws_elb.web-elb.dns_name
 }
+
+data "http" "example" {
+  url = "http://" + aws_elb.web-elb.dns_name + ":" + var.app-port """ 
+  
+  request_headers = {
+    Accept = "application/json"
+  }
+}
