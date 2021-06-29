@@ -18,7 +18,6 @@ variable "app-name" {
 
 variable "app-port" {
   type  = number
-  default = 443
 }
 
 variable "ami_name" {
@@ -36,7 +35,7 @@ variable "max_inst" {
 }
 
 ####################################################################
-# On recherche la derniere AMI créée avec le Name TAG Packer-Ansible
+# On recherche l'AMI en fonction du nom et du port
 data "aws_ami" "selected" {
   owners = ["self"]
   filter {
@@ -48,10 +47,10 @@ data "aws_ami" "selected" {
     name   = "tag:Name"
     values = ["${var.ami_name}"]
   }
-#  filter {
-#    name  = "tag:Port"
-#    values = ["${var.app-port}"]
-#  }
+  filter {
+    name  = "tag:Port"
+    values = ["${var.app-port}"]
+  }
   most_recent = true
 }
 
