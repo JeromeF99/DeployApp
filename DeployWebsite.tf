@@ -120,12 +120,6 @@ resource "aws_security_group" "web-sg-asg" {
     to_port         = "${var.app-port}"
     security_groups = [aws_security_group.web-sg-elb.id] # on authorise en entrée de l'ASG que le flux venant de l'ELB
   }
-  ingress {
-    from_port       = "${var.app-port}"
-    protocol        = "tcp"
-    to_port         = "${var.app-port}"
-    security_groups = [aws_security_group.web-sg-asg.id] # on authorise en entrée de l'ASG que le flux venant de l'ELB
-  }
   lifecycle {
     create_before_destroy = true
   }
